@@ -157,14 +157,14 @@ extension AlbumTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionVi
         var photo = UIImage(systemName: "pencil")
         let url = Profile.shared.albums[tag].photosURLs[indexPath.item]
         
-        if let img = CacheManager.shared.cache.object(forKey: NSString(string: url)) {
+        if let img = CacheManager.shared.imagesCache.object(forKey: NSString(string: url)) {
             DispatchQueue.main.async {
                 photo = img
                 viewController.openPhotoOnFullScreen(photo: photo!)
             }
         } else {
             guard let img = FirebaseManager.shared.getPhoto(urlString: url) else { return }
-            CacheManager.shared.cache.setObject(img, forKey: NSString(string: url))
+            CacheManager.shared.imagesCache.setObject(img, forKey: NSString(string: url))
             DispatchQueue.main.async {
                 viewController.openPhotoOnFullScreen(photo: photo!)
             }
@@ -191,13 +191,13 @@ extension AlbumTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionVi
             guard Profile.shared.albums[tag].photosURLs.count > indexPath.item else { return }
             let url = Profile.shared.albums[tag].photosURLs[indexPath.item]
 
-            if let img = CacheManager.shared.cache.object(forKey: NSString(string: url)) {
+            if let img = CacheManager.shared.imagesCache.object(forKey: NSString(string: url)) {
                 DispatchQueue.main.async {
                     cell.imageView.image = img
                 }
             } else {
                 guard let img = FirebaseManager.shared.getPhoto(urlString: url) else { return }
-                CacheManager.shared.cache.setObject(img, forKey: NSString(string: url))
+                CacheManager.shared.imagesCache.setObject(img, forKey: NSString(string: url))
                 DispatchQueue.main.async {
                     if cell.tag == indexPath.item {
                         cell.imageView.image = img
@@ -230,6 +230,8 @@ extension AlbumTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionVi
             TableRowSizes.share.forZeroPhotos = self.frame.size
             TableRowSizes.share.forLessThanFourPhotos = CGSize(width: self.frame.size.width, height: self.frame.height + collectionViewHeightConstraint.constant)
             TableRowSizes.share.forMoreThanThreePhotos = CGSize(width: self.frame.size.width, height: self.frame.height + collectionViewHeightConstraint.constant * 2 + CGFloat(minimumSpacingForSection))
+            let table = self.superview as? UITableView
+            table?.reloadData()
         }
         
         return CGSize(width: width, height: height)

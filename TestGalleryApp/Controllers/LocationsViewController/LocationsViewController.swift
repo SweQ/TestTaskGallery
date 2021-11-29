@@ -23,9 +23,13 @@ class LocationsViewController: UIViewController {
         super.viewDidLoad()
         setupHeaderView()
         setupTableView()
-        loadTable()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadTable()
+    }
+//MARK: -Observers
     func setupObservers() {
         NotificationCenter.default.addObserver(
             self,
@@ -53,6 +57,10 @@ class LocationsViewController: UIViewController {
         tableViewBottomAnchor?.constant = 0
     }
     
+    @objc func tapGestureHandler(sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
+//MARK: -Load table
     func loadTable() {
         DispatchQueue.global().async {
             FirebaseManager.shared.getAlbums {
@@ -64,7 +72,7 @@ class LocationsViewController: UIViewController {
             }
         }
     }
-    
+//MARK: -Setup ui elements
     func setupHeaderView() {
         setupHeaderViewAnchors()
     }
@@ -93,7 +101,7 @@ class LocationsViewController: UIViewController {
             forCellReuseIdentifier: CellsIdentifiers.CreateAlbumTableViewCell.rawValue
         )
     }
-    
+//MARK: -Actions
     func showImagePicker(from cellTag: Int) {
         albumTagForUploadImage = cellTag
         let imagePicker = UIImagePickerController()
@@ -116,10 +124,6 @@ class LocationsViewController: UIViewController {
             )
         )
         view.addSubview(imageView)
-    }
-    
-    @objc func tapGestureHandler(sender: UITapGestureRecognizer) {
-        sender.view?.removeFromSuperview()
     }
 }
 

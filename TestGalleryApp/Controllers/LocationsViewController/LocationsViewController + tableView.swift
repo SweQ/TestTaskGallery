@@ -13,6 +13,7 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return Profile.shared.albums.count
@@ -34,11 +35,12 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.viewController = self
             cell.collectionView.reloadData()
             return cell
-            
         } else {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: CellsIdentifiers.CreateAlbumTableViewCell.rawValue
-            ) as? CreateAlbumTableViewCell else { return UITableViewCell() }
+            ) as? CreateAlbumTableViewCell else {
+                return UITableViewCell()
+            }
             cell.backgroundColor = .clear
             return cell
         }

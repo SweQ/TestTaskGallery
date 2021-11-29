@@ -17,8 +17,4 @@ class AlertCreator {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         return alert
     }
-    
-    func alertForBadEmailOrPassword() -> UIAlertController {
-        return createAlert(title: "Error", message: "Need correct email and password.")
-    }
 }

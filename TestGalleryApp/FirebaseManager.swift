@@ -142,7 +142,7 @@ class FirebaseManager{
                     album: Profile.shared.albums[tag].id,
                     photo: urlString
                 )
-                CacheManager.shared.cache.setObject(
+                CacheManager.shared.imagesCache.setObject(
                     photo,
                     forKey: NSString(string: urlString)
                 )

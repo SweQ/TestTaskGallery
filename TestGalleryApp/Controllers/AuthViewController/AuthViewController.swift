@@ -73,7 +73,7 @@ class AuthViewController: UIViewController {
         guard let email = emailTextField.text,
               let password = passwordTextField.text
         else {
-            let alert = AlertCreator.shared.alertForBadEmailOrPassword()
+            let alert = AlertCreator.shared.createAlert(title: "Error", message: "Need correct email and password.")
             present(alert, animated: true, completion: nil)
             return
         }

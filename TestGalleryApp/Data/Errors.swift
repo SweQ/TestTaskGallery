@@ -13,4 +13,5 @@ enum Errors: String {
     case getPhoto = "Error in func 'getPhoto'"
     case deletePhoto = "Error in func 'deletePhoto'"
     case addPhotoToStorage = "Error in func 'addPhotoToStorage'"
+    case imagePickerController = "Error in func 'imagePickerController'"
 }

@@ -10,5 +10,5 @@ import UIKit
 
 class CacheManager {
     static let shared = CacheManager()
-    var cache = NSCache<NSString, UIImage>()
+    var imagesCache = NSCache<NSString, UIImage>()
 }

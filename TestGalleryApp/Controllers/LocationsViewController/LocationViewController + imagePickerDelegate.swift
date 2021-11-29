@@ -16,11 +16,13 @@ extension LocationsViewController: UIImagePickerControllerDelegate, UINavigation
         guard let img = info[.editedImage] as? UIImage,
         let tag = albumTagForUploadImage
         else {
+            print(Errors.imagePickerController)
             return
         }
         FirebaseManager.shared.uploadPhoto(
             photo: img,
-            tag: tag) { [weak self] in
+            tag: tag
+        ) { [weak self] in
                 self?.tableView.reloadData()
             }
         picker.dismiss(animated: true)
