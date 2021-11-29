@@ -47,6 +47,7 @@
 		72E802F62746DD330003F4DA /* LocationsViewController + tableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E802F52746DD330003F4DA /* LocationsViewController + tableView.swift */; };
 		72E802FB2749577B0003F4DA /* FirebaseFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E802FA2749577B0003F4DA /* FirebaseFields.swift */; };
 		72E802FD274961340003F4DA /* FirebaseCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E802FC274961340003F4DA /* FirebaseCollections.swift */; };
+		72E802FF2754D7F30003F4DA /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E802FE2754D7F30003F4DA /* Errors.swift */; };
 		72F93C8627302ED90099A15F /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F93C8427302ED90099A15F /* PhotoCell.swift */; };
 		72F93C8727302ED90099A15F /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F93C8527302ED90099A15F /* PhotoCell.xib */; };
 		72F93C89273151CD0099A15F /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F93C88273151CD0099A15F /* FirebaseManager.swift */; };
@@ -98,6 +99,7 @@
 		72E802F52746DD330003F4DA /* LocationsViewController + tableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationsViewController + tableView.swift"; sourceTree = "<group>"; };
 		72E802FA2749577B0003F4DA /* FirebaseFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFields.swift; sourceTree = "<group>"; };
 		72E802FC274961340003F4DA /* FirebaseCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCollections.swift; sourceTree = "<group>"; };
+		72E802FE2754D7F30003F4DA /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		72F93C8427302ED90099A15F /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		72F93C8527302ED90099A15F /* PhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		72F93C88273151CD0099A15F /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				72648C86272F1A1900ACADC9 /* TableRowSizes.swift */,
 				72E802E72746CD020003F4DA /* ControllersNames.swift */,
 				72E802FC274961340003F4DA /* FirebaseCollections.swift */,
+				72E802FE2754D7F30003F4DA /* Errors.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				726B1AAE2726A7CB0065CD5A /* Profile.swift in Sources */,
 				72E802F02746D4F20003F4DA /* NibNames.swift in Sources */,
 				72E802FD274961340003F4DA /* FirebaseCollections.swift in Sources */,
+				72E802FF2754D7F30003F4DA /* Errors.swift in Sources */,
 				72E802F22746D6020003F4DA /* CellsIdentifiers.swift in Sources */,
 				726B1AA72726961B0065CD5A /* AlbumTableViewCell.swift in Sources */,
 				72567D9327429B3F004B56BC /* ScreenManager.swift in Sources */,

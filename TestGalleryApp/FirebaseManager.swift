@@ -28,7 +28,7 @@ class FirebaseManager{
     
     func createNewAlbum(with location: String) -> String? {
         guard let user = Profile.shared.user else {
-            print("Error createNewAlbum: no user!")
+            print(Errors.createNewAlbum)
             return nil
         }
         let albumDocument = refFirestoreAlbums.document()
@@ -56,7 +56,7 @@ class FirebaseManager{
 
    func getAlbums(loadPhotosCompletion: @escaping () -> ()) {
        guard let userId = Profile.shared.user?.id else {
-           print("get album error! No user")
+           print(Errors.getAlbums)
            return
        }
        let dg = DispatchGroup()
@@ -68,10 +68,11 @@ class FirebaseManager{
         by: FirebaseFields.dataCreate.rawValue
        ).getDocuments { snapshot, error in
            if let error = error {
-               print("Error getAlbums. Description: \(error.localizedDescription)")
+               print("\(Errors.getAlbums): \(error.localizedDescription)")
+               return
            }
            guard let snapshot = snapshot else {
-               print("Error getAlbums. Description: snapshot is nil")
+               print(Errors.getAlbums)
                return
            }
            
@@ -82,7 +83,7 @@ class FirebaseManager{
                guard let photosURLs = document.data()[FirebaseFields.photosURLs.rawValue] as? [String],
                      let location = document.data()[FirebaseFields.location.rawValue] as? String
                else {
-                   print("Error getAlbums. Description: photosURLs or location is nil.")
+                   print(Errors.getAlbums)
                    return
                }
                Profile.shared.albums.first { album in
@@ -102,16 +103,16 @@ class FirebaseManager{
 
     func getPhoto(urlString: String) -> UIImage? {
         guard let url = URL(string: urlString) else {
-            print("Error transform urlString")
+            print(Errors.getPhoto)
             return nil
         }
         guard let data = try? Data(contentsOf: url) else {
-            print("Error download image")
+            print(Errors.getPhoto)
             return nil
         }
         guard let image = UIImage(data: data) else
         {
-            print("Error convert data to image")
+            print(Errors.getPhoto)
             return nil
         }
         
@@ -123,8 +124,8 @@ class FirebaseManager{
             guard let url = URL(string: urlString) else { return }
             album.photosURLs = album.photosURLs.filter({ $0 != urlString })
             refStorage.child(url.lastPathComponent).delete { error in
-                if error != nil {
-                    print("ERROR: delete photo from storage. ")
+                if let error = error {
+                    print("\(Errors.deletePhoto): \(error.localizedDescription)")
                 }
             }
         }
@@ -135,8 +136,8 @@ class FirebaseManager{
     }
     
     func uploadPhoto(photo: UIImage, tag: Int, completion: (()->())?) {
-        DispatchQueue.global().async {
-            FirebaseManager.shared.addPhotoToStorage(photo: photo) { urlString in
+        DispatchQueue.global().async { [weak self] in
+            self?.addPhotoToStorage(photo: photo) { urlString in
                 FirebaseManager.shared.addPhotoInAlbum(
                     album: Profile.shared.albums[tag].id,
                     photo: urlString
@@ -161,17 +162,17 @@ class FirebaseManager{
         metadata.contentType = "image/jpeg"
         
         ref.putData(imageData, metadata: metadata) { metadata, error in
-            if error != nil {
-                print("Error addPhotoToStorage")
+            if let error = error {
+                print("\(Errors.addPhotoToStorage): \(error.localizedDescription)")
                 return
             }
             ref.downloadURL { url, error in
-                if error != nil {
-                    print("downloadURL Error")
+                if let error = error {
+                    print("\(Errors.addPhotoToStorage): \(error.localizedDescription)")
                     return
                 }
                 guard let url = url else {
-                    print("get imageURL error.")
+                    print(Errors.addPhotoToStorage)
                     return
                 }
                 completion("\(url)")
